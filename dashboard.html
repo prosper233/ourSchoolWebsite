@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-    <div class="sidebar">
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
         <h2>Dashboard</h2>
         <ul>
             <li><a href="#profile">Profile</a></li>
@@ -17,32 +20,33 @@
             <li><a href="#settings">Settings</a></li>
         </ul>
     </div>
-    
-    <div class="main-content">
+
+    <!-- Main Content -->
+    <div class="main-content" id="main-content">
         <div class="header">
             <h1>Welcome, Student</h1>
         </div>
-        
+
         <section id="results" class="card">
             <h2>Exam Results</h2>
             <p>Your latest grades will be displayed here.</p>
         </section>
-        
+
         <section id="events" class="card">
             <h2>Upcoming Events</h2>
             <p>Stay updated with the latest school events.</p>
         </section>
-        
+
         <section id="payments" class="card">
             <h2>Payment History</h2>
             <p>Track your past and pending payments.</p>
         </section>
-        
+
         <section id="profile" class="card">
             <h2>Student Profile</h2>
             <p>View and edit your profile information.</p>
         </section>
-        
+
         <section id="settings" class="card">
             <h2>Settings</h2>
             <p>Manage your account settings and preferences.</p>
@@ -50,7 +54,7 @@
     </div>
 
 <style>
-/* CSS */
+/* Global Styles */
 * {
     margin: 0;
     padding: 0;
@@ -58,39 +62,62 @@
     font-family: 'Arial', sans-serif;
 }
 
+/* Body Layout */
 body {
     display: flex;
     background: #f4f4f4;
 }
 
+/* Sidebar */
 .sidebar {
     width: 250px;
+    height: 100vh;
     background: #0b1524;
     color: white;
-    height: 100vh;
-    padding: 20px;
     position: fixed;
+    left: -250px; /* Initially hidden */
+    top: 0;
+    padding: 20px;
+    transition: left 0.3s ease-in-out;
 }
 
+/* Sidebar Button */
+.toggle-btn {
+    position: absolute;
+    top: 20px;
+    right: -40px;
+    background: #0b1524;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+/* Sidebar Menu */
 .sidebar ul {
     list-style: none;
-    padding: 0;
+    margin-top: 40px;
 }
 
 .sidebar ul li {
     padding: 15px;
-    border-bottom: 1px solid #0b1524;
+    border-bottom: 1px solid #1d273b;
 }
 
 .sidebar ul li a {
     color: white;
     text-decoration: none;
+    display: block;
 }
 
+/* Main Content */
 .main-content {
-    margin-left: 260px;
+    margin-left: 0; /* Adjusted dynamically */
     padding: 20px;
     width: 100%;
+    transition: margin-left 0.3s ease-in-out;
 }
 
 .header {
@@ -109,6 +136,27 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
+/* Active Sidebar */
+.sidebar.active {
+    left: 0;
+}
+
+.main-content.active {
+    margin-left: 250px;
+}
 </style>
+
+<!-- JavaScript for Sidebar Toggle -->
+<script>
+function toggleSidebar() {
+    let sidebar = document.getElementById("sidebar");
+    let content = document.getElementById("main-content");
+
+    sidebar.classList.toggle("active");
+    content.classList.toggle("active");
+}
+</script>
+
 </body>
 </html>
